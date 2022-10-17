@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Banner from "../components/banner/banner";
 import NavBar from "../components/nav/navbar";
+import Card from "../components/card/card";
 
 const Home: NextPage = () => {
   return (
@@ -21,7 +22,9 @@ const Home: NextPage = () => {
         imgUrl="/static/210629.jpg"
       />
 
-      {/* <Card /> */}
+      <Card imgUrl="/static/210629.jpg" size="large" />
+      <Card  size="medium" />
+      <Card imgUrl="/static/210629.jpg" size="small" />
     </div>
   );
 };
