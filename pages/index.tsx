@@ -4,9 +4,17 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Banner from "../components/banner/banner";
 import NavBar from "../components/nav/navbar";
-import Card from "../components/card/card";
+import SectionCards from "../components/card/section-cards";
+import { getVideos } from "../lib/videos";
+import type Video from "../ts/interfaces/videos";
 
-const Home: NextPage = () => {
+// server
+export async function getServerSideProps() {
+  const disneyVideos = await getVideos();
+  return { props: { disneyVideos } };
+}
+
+const Home: NextPage<{ disneyVideos: Video[] }> = (props) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -21,10 +29,14 @@ const Home: NextPage = () => {
         subtitle="a very cute dog"
         imgUrl="/static/210629.jpg"
       />
-
-      <Card imgUrl="/static/210629.jpg" size="large" />
-      <Card  size="medium" />
-      <Card imgUrl="/static/210629.jpg" size="small" />
+      <div className={styles.sectionWrapper}>
+        <SectionCards title="Disney" videos={props.disneyVideos} size="large" />
+        <SectionCards
+          title="Disney"
+          videos={props.disneyVideos}
+          size="medium"
+        />
+      </div>
     </div>
   );
 };
