@@ -10,11 +10,20 @@ import type Video from "../ts/interfaces/videos";
 
 // server
 export async function getServerSideProps() {
-  const disneyVideos = await getVideos();
-  return { props: { disneyVideos } };
+  const disneyVideos = await getVideos("Disney Trailer");
+  const productivityVideos = await getVideos("Productivity");
+
+  const travelVideos = await getVideos("Travel");
+  // const popularVideos = await getVideos("Disney Trailer");
+
+  return { props: { disneyVideos, productivityVideos, travelVideos } };
 }
 
-const Home: NextPage<{ disneyVideos: Video[] }> = (props) => {
+const Home: NextPage<{
+  disneyVideos: Video[];
+  productivityVideos: Video[];
+  travelVideos: Video[];
+}> = (props) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -30,12 +39,14 @@ const Home: NextPage<{ disneyVideos: Video[] }> = (props) => {
         imgUrl="/static/210629.jpg"
       />
       <div className={styles.sectionWrapper}>
-        <SectionCards title="Disney" videos={props.disneyVideos} size="large" />
+        {/* <SectionCards title="Disney" videos={props.disneyVideos} size="large" />
+        <SectionCards title="Travel" videos={props.travelVideos} size="small" />
         <SectionCards
-          title="Disney"
-          videos={props.disneyVideos}
+          title="Productivity"
+          videos={props.productivityVideos}
           size="medium"
-        />
+        /> */}
+        {/* <SectionCards title="Popular" videos={[]} size="small" /> */}
       </div>
     </div>
   );

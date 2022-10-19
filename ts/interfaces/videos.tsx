@@ -1,3 +1,5 @@
 export default interface Video {
-  disneyVideos: any;
+  disneyVideos: object;
+  travelVideos: object;
+  productivityVideos: object;
 }
