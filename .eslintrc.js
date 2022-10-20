@@ -45,8 +45,8 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     "jsx-a11y/anchor-is-valid": "off",
 
-    // 'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-    // 'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
     // semi: ["error", "always"],
   },
 };
