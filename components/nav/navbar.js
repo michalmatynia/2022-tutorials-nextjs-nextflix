@@ -1,7 +1,7 @@
 import styles from "./navbar.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { magic } from "../../lib/magic-client";
 
@@ -14,6 +14,18 @@ export const NavBar = () => {
   const handleOnClickHome = (e) => {
     e.preventDefault();
     router.push("/");
+  };
+
+  const handleSignout = async (e) => {
+    e.preventDefault();
+
+    try {
+      await magic.user.logout();
+      router.push("/login");
+    } catch (error) {
+      console.log("Error logging out", error);
+      router.push("/login");
+    }
   };
 
   const handleOnClickMyList = (e) => {
@@ -81,9 +93,9 @@ export const NavBar = () => {
             {showDropdown && (
               <div className={styles.navDropdown}>
                 <div>
-                  <Link href="/login">
-                    <a className={styles.linkName}>Sign out</a>
-                  </Link>
+                  <a className={styles.linkName} onClick={handleSignout}>
+                    Sign out
+                  </a>
                   <div className={styles.lineWrapper}></div>
                 </div>
               </div>
