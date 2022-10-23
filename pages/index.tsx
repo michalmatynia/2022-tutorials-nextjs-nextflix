@@ -28,7 +28,7 @@ const Home: NextPage<Video> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
-        <NavBar username="michal" />
+        <NavBar />
         <Banner
           title="Clifford red"
           subtitle="a very cute dog"
