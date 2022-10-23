@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { magic } from "../lib/magic-client";
 import "../styles/globals.css";
+import Loading from "../components/loading/loading";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -14,7 +15,6 @@ function MyApp({ Component, pageProps }) {
         // route to /
         router.push("/");
       } else {
-        console.log("Da Fak");
         // route to /login
         router.push("/login");
       }
@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router.events]);
 
-  return isLoading ? <div>Is Loading...</div> : <Component {...pageProps} />;
+  return isLoading ? <Loading /> : <Component {...pageProps} />;
 }
 
 export default MyApp;

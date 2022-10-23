@@ -1,16 +1,28 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "./banner.module.css";
 
 interface Props {
+  videoId: string;
   title: string;
   subtitle: string;
   imgUrl: string;
   styles?: string;
 }
 
-export const Banner: React.FC<Props> = ({ title, subtitle, imgUrl }) => {
-  const handleOnPlay = () => {};
+export const Banner: React.FC<Props> = ({
+  title,
+  subtitle,
+  imgUrl,
+  videoId,
+}) => {
+  const router = useRouter();
+
+  const handleOnPlay = () => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    router.push(`video/${videoId}`);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.leftWrapper}>
