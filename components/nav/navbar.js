@@ -48,6 +48,7 @@ export const NavBar = () => {
 
     try {
       fetchData().then((userEmail) => {
+
         if (userEmail) {
           console.log(userEmail);
           setUsername(userEmail);

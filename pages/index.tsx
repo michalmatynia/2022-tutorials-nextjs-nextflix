@@ -7,17 +7,17 @@ import SectionCards from "../components/card/section-cards";
 import { getVideos, getPopularVideos } from "../lib/videos";
 import type Video from "../ts/interfaces/videos";
 // server
-export async function getServerSideProps() {
-  const disneyVideos = await getVideos("Disney Trailer");
-  const productivityVideos = await getVideos("Productivity");
+// export async function getServerSideProps() {
+//   const disneyVideos = await getVideos("Disney Trailer");
+//   const productivityVideos = await getVideos("Productivity");
 
-  const travelVideos = await getVideos("Travel");
-  const popularVideos = await getPopularVideos();
+//   const travelVideos = await getVideos("Travel");
+//   const popularVideos = await getPopularVideos();
 
-  return {
-    props: { disneyVideos, productivityVideos, travelVideos, popularVideos },
-  };
-}
+//   return {
+//     props: { disneyVideos, productivityVideos, travelVideos, popularVideos },
+//   };
+// }
 
 const Home: NextPage<Video> = (props) => {
   return (
@@ -35,7 +35,7 @@ const Home: NextPage<Video> = (props) => {
           imgUrl="/static/210629.jpg"
         />
         <div className={styles.sectionWrapper}>
-          <SectionCards
+          {/* <SectionCards
             title="Disney"
             videos={props.disneyVideos}
             size="large"
@@ -54,7 +54,7 @@ const Home: NextPage<Video> = (props) => {
             title="Popular"
             videos={props.popularVideos}
             size="small"
-          />
+          /> */}
         </div>
       </div>
     </div>

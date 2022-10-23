@@ -20,7 +20,7 @@ export const Login = () => {
     // from the event with the `off` method:
     return () => {
       router.events.off("routeChangeComplete", handleComplete);
-      router.events.on("routeChangeError", handleComplete);
+      router.events.off("routeChangeError", handleComplete);
     };
   }, [router.events]);
 
