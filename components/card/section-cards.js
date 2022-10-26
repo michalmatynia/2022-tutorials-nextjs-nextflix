@@ -11,7 +11,14 @@ const SectionCards = (props) => {
         {videos.map((video, index) => {
           return (
             <Link key={`${video.id}`} href={`/video/${video.id}`}>
-              <Card key={index} id={index} imgUrl={video.imgUrl} size={size} />
+              <a>
+                <Card
+                  key={index}
+                  id={index}
+                  imgUrl={video.imgUrl}
+                  size={size}
+                />
+              </a>
             </Link>
           );
         })}

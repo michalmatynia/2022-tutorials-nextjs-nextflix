@@ -1,30 +1,27 @@
 import { useRouter } from "next/router";
 import Modal from "react-modal";
 import styles from "../../styles/Video.module.css";
+import { getYoutubeVideoById } from "../../lib/videos";
+import { NavBar } from "../../components/nav/navbar";
 
 import clsx from "classnames";
 
 Modal.setAppElement("#__next");
 
-export async function getStaticProps() {
-  const video = {
-    title: "Hi cute dog",
-    publishTime: "1990-01-01",
-    decription: "A big red dog is super",
-    channelTitle: "Paramount Pictures",
-    viewCount: 1000,
-  };
+export async function getStaticProps(context) {
+  const videoId = context.params.videoId;
 
+  const videoArray = await getYoutubeVideoById(videoId);
   return {
     props: {
-      video,
+      video: videoArray.length > 0 ? videoArray[0] : {},
     },
     revalidate: 10, // In seconds
   };
 }
 
 export async function getStaticPaths() {
-  const listOfVideos = ["bKh2G73gCCs"];
+  const listOfVideos = ["bKh2G73gCCs", "OCsIlOuThuA"];
 
   const paths = listOfVideos.map((videoId) => ({
     params: { videoId },
@@ -35,10 +32,17 @@ export async function getStaticPaths() {
 const Video = ({ video }) => {
   const router = useRouter();
 
-  const { title, publishTime, description, channelTitle, viewCount } = video;
+  const {
+    title,
+    publishTime,
+    description,
+    channelTitle,
+    statistics: { viewCount } = { viewCount: 0 },
+  } = video;
 
   return (
     <div className={styles.container}>
+      <NavBar />
       <Modal
         isOpen={true}
         contentLabel="Watch the Video"

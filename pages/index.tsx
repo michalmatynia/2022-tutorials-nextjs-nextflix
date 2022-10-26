@@ -30,7 +30,7 @@ const Home: NextPage<Video> = (props) => {
       <div className={styles.main}>
         <NavBar />
         <Banner
-        videoId="bKh2G73gCCs"
+          videoId="bKh2G73gCCs"
           title="Clifford red"
           subtitle="a very cute dog"
           imgUrl="/static/210629.jpg"
