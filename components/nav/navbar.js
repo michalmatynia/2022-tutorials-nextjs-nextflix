@@ -66,8 +66,8 @@ export const NavBar = () => {
             <Image
               src="/static/netflix.svg"
               alt="Netflix Logo"
-              width="128px"
-              height="34px"
+              width="128"
+              height="34"
             />
           </div>
         </Link>
@@ -86,8 +86,8 @@ export const NavBar = () => {
               <Image
                 src="/static/expand_more.svg"
                 alt="Expand more"
-                width="24px"
-                height="24px"
+                width="24"
+                height="24"
               />
             </button>
             {showDropdown && (

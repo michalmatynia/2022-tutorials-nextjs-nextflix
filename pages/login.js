@@ -77,8 +77,8 @@ export const Login = () => {
               <Image
                 src="/static/netflix.svg"
                 alt="Netflix Logo"
-                width="128px"
-                height="34px"
+                width="128"
+                height="34"
               />
             </div>
           </Link>

@@ -38,8 +38,8 @@ export const Banner: React.FC<Props> = ({
               <Image
                 src="/static/play_arrow.svg"
                 alt="Play Icon"
-                width="32px"
-                height="32px"
+                width="32"
+                height="32"
               />
               <span className={styles.playText}>Play</span>
             </button>

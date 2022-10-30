@@ -20,6 +20,21 @@ export const Card = (props) => {
     small: styles.smItem,
   };
 
+  const imageSize = {
+    large: {
+      width: "218",
+      height: "434",
+    },
+    medium: {
+      width: "158",
+      height: "280",
+    },
+    small: {
+      width: "300",
+      height: "170",
+    },
+  };
+
   const handleOnError = () => {
     console.log("hi error");
     setImgSrc(
@@ -28,6 +43,7 @@ export const Card = (props) => {
   };
 
   const scale = id === 0 ? { scaleY: 1.1 } : { scale: 1.1 };
+
   return (
     <div className={styles.container}>
       <motion.div
@@ -42,6 +58,8 @@ export const Card = (props) => {
           layout="fill"
           onError={handleOnError}
           className={styles.cardImg}
+          width={imageSize[size].width}
+          height={imageSize[size].height}
         />
       </motion.div>
     </div>
