@@ -39,24 +39,32 @@ export const Login = () => {
     e.preventDefault();
 
     if (email) {
-      if (email === "mmatynia@gmail.com") {
-        try {
-          setIsLoading(true);
-          const didToken = await magic.auth.loginWithMagicLink({ email });
+      try {
+        setIsLoading(true);
+        const didToken = await magic.auth.loginWithMagicLink({ email });
 
-          if (didToken) {
+        if (didToken) {
+          const response = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${didToken}`,
+              "Content-Type": "application/json",
+            },
+          });
+
+          const loggedInResponse = await response.json();
+          if (loggedInResponse.done) {
             router.push("/");
-          }
-        } catch (error) {
-          setIsLoading(false);
+          } else {
+            setIsLoading(false);
 
-          // Handle errors if required!
+            setUserMsg("Problem logging in");
+          }
         }
-      } else {
-        // show user message
+      } catch (error) {
         setIsLoading(false);
 
-        setUserMsg("Something went wrong");
+        // Handle errors if required!
       }
     } else {
       setIsLoading(false);

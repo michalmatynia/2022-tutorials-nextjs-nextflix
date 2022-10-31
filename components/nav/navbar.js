@@ -41,7 +41,8 @@ export const NavBar = () => {
   useEffect(() => {
     async function fetchData() {
       if (magic) {
-        const { email } = await magic.user.getMetadata();
+        const { email, issuer } = await magic.user.getMetadata();
+        const didToken = magic.user.getIdToken();
         return email;
       }
     }
