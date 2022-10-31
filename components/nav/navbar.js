@@ -42,7 +42,8 @@ export const NavBar = () => {
     async function fetchData() {
       if (magic) {
         const { email, issuer } = await magic.user.getMetadata();
-        const didToken = magic.user.getIdToken();
+        const didToken = await magic.user.getIdToken();
+        // console.log(didToken);
         return email;
       }
     }
@@ -50,7 +51,6 @@ export const NavBar = () => {
     try {
       fetchData().then((userEmail) => {
         if (userEmail) {
-          console.log(userEmail);
           setUsername(userEmail);
         }
       });
