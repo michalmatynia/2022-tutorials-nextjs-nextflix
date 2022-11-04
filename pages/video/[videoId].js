@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Modal from "react-modal";
 import styles from "../../styles/Video.module.css";
@@ -34,6 +34,7 @@ export async function getStaticPaths() {
 const Video = ({ video }) => {
   const router = useRouter();
 
+  const videoId = router.query.videoId;
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleDisLike, setToggleDisLike] = useState(false);
 
@@ -45,13 +46,56 @@ const Video = ({ video }) => {
     statistics: { viewCount } = { viewCount: 0 },
   } = video;
 
-  const handleToggleDislike = (e) => {
-    setToggleDisLike(!toggleDisLike);
-    setToggleLike(toggleDisLike);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(`/api/stats?videoId=${videoId}`, {
+        method: "GET",
+      });
+
+      return response.json();
+    }
+
+    fetchData().then((data) => {
+      if (data.length > 0) {
+        const favourited = data[0].favourited;
+        if (favourited === 1) {
+          setToggleLike(true);
+        } else if (favourited === 0) {
+          setToggleDisLike(true);
+        }
+      }
+    });
+  }, []);
+
+  const runRatingService = async (favourited) => {
+    return await fetch("/api/stats", {
+      method: "POST",
+      body: JSON.stringify({
+        videoId,
+        favourited,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
-  const handleToggleLike = (e) => {
-    setToggleLike(!toggleLike);
+
+  const handleToggleDislike = async (e) => {
+    const val = !toggleDisLike;
+
+    setToggleDisLike(val);
+    setToggleLike(toggleDisLike);
+
+    const favourited = val ? 0 : 1;
+    const response = await runRatingService(favourited);
+  };
+  const handleToggleLike = async (e) => {
+    const val = !toggleLike;
+    setToggleLike(val);
     setToggleDisLike(toggleLike);
+
+    const favourited = val ? 1 : 0;
+    const response = await runRatingService(favourited);
   };
 
   return (
@@ -72,7 +116,7 @@ const Video = ({ video }) => {
           type="text/html"
           width="100%"
           height="390"
-          src={`http://www.youtube.com/embed/${router.query.videoId}?enablejsapi=1&origin=http://example.com&controls=0&rel=0`}
+          src={`http://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://example.com&controls=0&rel=0`}
           frameBorder="0"
         ></iframe>
         <div className={styles.likeDislikeBtnWrapper}>
