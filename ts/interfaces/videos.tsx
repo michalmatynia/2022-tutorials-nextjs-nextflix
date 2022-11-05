@@ -3,4 +3,5 @@ export default interface Video {
   travelVideos: object;
   productivityVideos: object;
   popularVideos: object;
+  watchItAgainVideos: object;
 }

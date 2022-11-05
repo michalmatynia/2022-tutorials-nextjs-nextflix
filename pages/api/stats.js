@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import { verifyToken } from "../../lib/utils";
 import {
   findVideoIdByUser,
   updateStats,
@@ -15,9 +15,8 @@ export default async function stats(req, resp) {
       const { videoId } = inputParams;
 
       if (videoId) {
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = verifyToken(token);
 
-        const userId = decodedToken.issuer;
         const findVideo = await findVideoIdByUser(token, userId, videoId);
         const doesStatsExist = findVideo?.length > 0;
 
@@ -34,7 +33,6 @@ export default async function stats(req, resp) {
             resp.send({ data: response });
           } else {
             // add it
-            console.log({ watched, userId, videoId, favourited });
             const response = await insertStats(token, {
               watched,
               userId,
