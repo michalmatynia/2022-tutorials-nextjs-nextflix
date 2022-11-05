@@ -96,6 +96,7 @@ const Video = ({ video }) => {
 
     const favourited = val ? 1 : 0;
     const response = await runRatingService(favourited);
+    console.log(response);
   };
 
   return (
