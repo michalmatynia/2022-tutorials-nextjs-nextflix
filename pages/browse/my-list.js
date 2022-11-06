@@ -4,7 +4,7 @@ import NavBar from "../../components/nav/navbar";
 import SectionCards from "../../components/card/section-cards";
 import redirectUser from "../../utils/redirectUser";
 import { getMyList } from "../../lib/videos";
-import styles from "../../styles/MyList.module.css";
+import styles from "../../styles/Mylist.module.css";
 
 export async function getServerSideProps(context) {
   const { userId, token } = await redirectUser(context);
