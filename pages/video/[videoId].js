@@ -65,7 +65,7 @@ const Video = ({ video }) => {
         }
       }
     });
-  }, []);
+  }, [videoId]);
 
   const runRatingService = async (favourited) => {
     return await fetch("/api/stats", {
