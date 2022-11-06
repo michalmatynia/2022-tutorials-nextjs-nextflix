@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "./banner.module.css";

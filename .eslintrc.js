@@ -12,6 +12,11 @@ module.exports = {
     "eslint:recommended",
     "plugin:react-hooks/recommended",
   ],
+  settings: {
+    react: {
+      version: "latest",
+    },
+  },
   overrides: [
     {
       files: ["*.ts", "*.tsx"], // Your TypeScript files extension

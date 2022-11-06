@@ -29,7 +29,7 @@ export const NavBar = () => {
         },
       });
 
-      const res = await response.json();
+      await response.json();
     } catch (error) {
       console.error("Error logging out", error);
       router.push("/login");
@@ -49,7 +49,7 @@ export const NavBar = () => {
   useEffect(() => {
     async function fetchData() {
       if (magic) {
-        const { email, issuer } = await magic.user.getMetadata();
+        const { email } = await magic.user.getMetadata();
         const didToken = await magic.user.getIdToken();
         if (email) {
           setUsername(email);
