@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Banner from "../components/banner/banner";
@@ -9,7 +8,6 @@ import {
   getPopularVideos,
   getWatchItAgainVideos,
 } from "../lib/videos";
-import type Video from "../ts/interfaces/videos";
 import redirectUser from "../utils/redirectUser";
 
 // server
@@ -45,7 +43,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-const Home: NextPage<Video> = (props) => {
+const Home = (props) => {
   return (
     <div className={styles.container}>
       <Head>
